@@ -21,6 +21,7 @@
           text-color="#fff"
           :collapse="iscollapse"
           :collapse-transition="false"
+          :router="true"
         >
           <el-submenu :index="item.id+''" v-for="item in menulist" :key="item.id">
             <template slot="title">
@@ -29,7 +30,11 @@
             </template>
 
             <!-- 二级 -->
-            <el-menu-item :index="subItem.id+''" v-for="subItem in item.children" :key="subItem.id">
+            <el-menu-item
+              :index=" '/'+ subItem.path+''"
+              v-for="subItem in item.children"
+              :key="subItem.id"
+            >
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{subItem.authName}}</span>
@@ -38,7 +43,10 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-      <el-main>主体</el-main>
+      <el-main>
+        <!-- 路由占位符 -->
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -49,6 +57,7 @@ export default {
     return {
       //侧边菜单栏列表
       menulist: [],
+      //二级菜单栏图标
       iconsObj: {
         "125": "iconfont icon-users",
         "103": "iconfont icon-tijikongjian",
@@ -72,7 +81,7 @@ export default {
       const { data: res } = await this.$http.get("menus");
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
       this.menulist = res.data;
-      console.log(res);
+      // console.log(res);
     },
     //菜单折叠功能
     togolist() {
