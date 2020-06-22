@@ -25,7 +25,7 @@
         <el-form-item prop="password">
           <el-input
             v-model="loginForm.password"
-            prefix-icon="el-icon-s-cooperation"
+            prefix-icon="iconfont icon-3702mima"
             placeholder="请输入密码"
             show-password
           ></el-input>
