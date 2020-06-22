@@ -3,6 +3,13 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import home from '../components/home.vue'
 import welcome from '../components/welcome.vue'
+import users from '../components/user/users.vue'
+
+//解决 Error: Avoided redundant navigation to current location: 报错信息
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 Vue.use(VueRouter)
 
@@ -26,8 +33,15 @@ const routes = [
     redirect:'/welcome',
     children: [{
       path: '/welcome',
-      component:welcome
-    }]
+      component: welcome,
+      
+    },
+      //展示用户列表
+      {
+        path: '/users',
+        component:users
+    }
+    ]
 },
     
 ]
