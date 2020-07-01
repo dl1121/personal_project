@@ -25,13 +25,13 @@
       </el-row>
 
       <!-- 用户数据列表 -->
-      <el-table :data="tableData" style="width: 100%" border stripe>
-        <el-table-column prop="date" label="日期" width="180"></el-table-column>
-        <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
-        <el-table-column prop="tel" label="电话" width="180"></el-table-column>
+      <el-table :data="userlist" style="width: 100%" border stripe>
+        <el-table-column prop="date" label="日期" width="200"></el-table-column>
+        <el-table-column prop="name" label="姓名" width="200"></el-table-column>
+        <el-table-column prop="email" label="邮箱" width="200"></el-table-column>
+        <el-table-column prop="tel" label="电话" width="200"></el-table-column>
         <el-table-column prop="address" label="地址" width="400"></el-table-column>
-        <el-table-column prop="status" label="状态" width="180"></el-table-column>
+        <el-table-column prop="status" label="状态" width="200"></el-table-column>
 
         <!-- 新增用户弹出表单 -->
 
@@ -50,30 +50,10 @@
               v-model="editForm.data"
             ></el-input>-->
             <el-date-picker class="formInput" v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
-            <el-input
-              class="formInput"
-              prefix-icon="el-icon-user-solid"
-              placeholder="请输入姓名"
-              v-model="editForm.name"
-            ></el-input>
-            <el-input
-              class="formInput"
-              prefix-icon="el-icon-message"
-              placeholder="请输入邮件地址"
-              v-model="editForm.email"
-            ></el-input>
-            <el-input
-              class="formInput"
-              prefix-icon="el-icon-phone-outline"
-              placeholder="请输入联系方式"
-              v-model="editForm.tel"
-            ></el-input>
-            <el-input
-              class="formInput"
-              prefix-icon="el-icon-office-building"
-              placeholder="请输入联系地址"
-              v-model="editForm.address"
-            ></el-input>
+            <el-input class="formInput" prefix-icon="el-icon-user-solid" placeholder="请输入姓名" v-model="editForm.name"></el-input>
+            <el-input class="formInput" prefix-icon="el-icon-message" placeholder="请输入邮件地址" v-model="editForm.email"></el-input>
+            <el-input class="formInput" prefix-icon="el-icon-phone-outline" placeholder="请输入联系方式" v-model="editForm.tel"></el-input>
+            <el-input class="formInput" prefix-icon="el-icon-office-building" placeholder="请输入联系地址" v-model="editForm.address"></el-input>
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -133,38 +113,7 @@ export default {
         address: ""
       },
       tableData: [
-        {
-          date: "2020-6-22",
-          name: "邓利",
-          email: "1693647988@qq.com",
-          status: "启用",
-          tel: "13088888888",
-          address: "江苏省泰州职业技术学院"
-        },
-        {
-          date: "2020-6-22",
-          name: "吴涛",
-          email: "123456789@163.com",
-          status: "启用",
-          tel: "13188888888",
-          address: "江苏省泰州职业技术学院"
-        },
-        {
-          date: "2020-6-22",
-          name: "卞雪",
-          email: "12345678910@qq.com",
-          status: "启用",
-          tel: "13288888888",
-          address: "江苏省泰州职业技术学院"
-        },
-        {
-          date: "2020-6-22",
-          name: "陈斌",
-          email: "123456@qq.com",
-          status: "禁用",
-          tel: "13388888888",
-          address: "江苏省泰州职业技术学院"
-        }
+        
       ]
     };
   },
@@ -172,17 +121,6 @@ export default {
   //     this.getUserList();
   //   },
   methods: {
-    // async getUserList() {
-    //   const { data: res } = await this.$http.get("users", {
-    //     params: this.queryInfo
-    //   });
-    //   if (res.meta.status !== 200) {
-    //     return this.$message.error("获得用户列表失败！");
-    //   }
-    //   this.userlist = res.data.users;
-    //   this.total = res.data.total;
-    //   console.log(res);
-    // },
     //删除功能实现
     handleDelete: function(index) {
       this.tableData.splice(index, 1);
@@ -212,6 +150,15 @@ export default {
       this.editForm = {};
       this.dialogVisible = false;
     }
+  },
+
+  //获取用户数据列表
+  created(){
+    var vm = this
+    this.$axios.get('https://www.easy-mock.com/mock/5efc777ebdec161dc9c4070f/userlist')
+    .then(resp=>{
+      vm.userlist = resp.data.userlist
+    });
   }
 };
 </script>
@@ -223,7 +170,5 @@ export default {
 .formInput {
   margin: 5px;
   width: 220px;
-  
 }
-
 </style>
