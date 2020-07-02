@@ -7,10 +7,12 @@ import axios from 'axios'
 
 Vue.prototype.$axios = axios;
 
+require('./mock')
+
 //导入字体图标库
 import './assets/fonts/iconfont.css'
 
-axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
+// axios.defaults.baseURL = 'http://timemeetyou.com:8889/api/private/v1/'
 
 axios.interceptors.request.use(config => {
   console.log(config)

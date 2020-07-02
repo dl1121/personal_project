@@ -47,7 +47,7 @@ export default {
     return {
       // 双向数据绑定
       loginForm: {
-        username: "admin",
+        username: "dengli",
         password: "123456"
       },
 
@@ -75,13 +75,38 @@ export default {
       this.$refs.loginFormRef.resetFields();
     },
     login() {
-      this.$refs.loginFormRef.validate(async valid => {
-        //   console.log(valid)
-        if (!valid) return;
-        const { data: res } = await this.$http.post("login", this.loginForm);
-        if (res.meta.status !== 200) return this.$message.error("登录失败！");
-        this.$message.success("登录成功！");
+      //   this.$refs.loginFormRef.validate(async valid => {
+      //     //   console.log(valid)
+      //     if (!valid) return;
+      //     const { data: res } = await this.$http.post("login", this.loginForm);
+      //     if (res.meta.status !== 200) return this.$message.error("登录失败！");
+      //     this.$message.success("登录成功！");
 
+      //     //保存token值
+      //     window.sessionStorage.setItem("token", res.data.token);
+
+      //     this.$router.push("/home");
+      //   });
+
+      this.$axios.post("/user/login", this.loginForm).then(res => {
+        var uname = res.data.data[0].username;
+        var upass = res.data.data[0].password;
+        if (
+          res.data.status !== 200 ||
+          this.loginForm.username !== uname ||
+          this.loginForm.password !== upass
+        )
+          return this.$message({
+            message: "登录失败！用户名或密码错误...",
+            center: true,
+            type: "error"
+          });
+
+        this.$message({
+          message: "登录成功",
+          center: true,
+          type: "success"
+        });
         //保存token值
         window.sessionStorage.setItem("token", res.data.token);
 
