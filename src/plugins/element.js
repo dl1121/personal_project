@@ -35,3 +35,4 @@ Vue.use(header)
 Vue.use(aside)
 Vue.use(main)
 Vue.prototype.$message = Message//全局挂载弹窗组件
+

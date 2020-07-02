@@ -26,7 +26,7 @@
 
       <!-- 用户数据列表 -->
       <el-table :data="userlist" style="width: 100%" border stripe>
-        <el-table-column prop="date" label="日期" width="200"></el-table-column>
+        <el-table-column prop="guid" label="序号" width="200"></el-table-column>
         <el-table-column prop="name" label="姓名" width="200"></el-table-column>
         <el-table-column prop="email" label="邮箱" width="200"></el-table-column>
         <el-table-column prop="tel" label="电话" width="200"></el-table-column>
@@ -43,17 +43,37 @@
           append-to-body
         >
           <el-form :model="editForm">
-            <!-- <el-input
+            <el-input
               class="formInput"
               prefix-icon="el-icon-time"
               placeholder
-              v-model="editForm.data"
-            ></el-input>-->
-            <el-date-picker class="formInput" v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
-            <el-input class="formInput" prefix-icon="el-icon-user-solid" placeholder="请输入姓名" v-model="editForm.name"></el-input>
-            <el-input class="formInput" prefix-icon="el-icon-message" placeholder="请输入邮件地址" v-model="editForm.email"></el-input>
-            <el-input class="formInput" prefix-icon="el-icon-phone-outline" placeholder="请输入联系方式" v-model="editForm.tel"></el-input>
-            <el-input class="formInput" prefix-icon="el-icon-office-building" placeholder="请输入联系地址" v-model="editForm.address"></el-input>
+              v-model="editForm.guid"
+            ></el-input>
+
+            <el-input
+              class="formInput"
+              prefix-icon="el-icon-user-solid"
+              placeholder="请输入姓名"
+              v-model="editForm.name"
+            ></el-input>
+            <el-input
+              class="formInput"
+              prefix-icon="el-icon-message"
+              placeholder="请输入邮件地址"
+              v-model="editForm.email"
+            ></el-input>
+            <el-input
+              class="formInput"
+              prefix-icon="el-icon-phone-outline"
+              placeholder="请输入联系方式"
+              v-model="editForm.tel"
+            ></el-input>
+            <el-input
+              class="formInput"
+              prefix-icon="el-icon-office-building"
+              placeholder="请输入联系地址"
+              v-model="editForm.address"
+            ></el-input>
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -81,7 +101,6 @@
       :total="total">
     </el-pagination>
       -->
-      
     </el-card>
   </div>
 </template>
@@ -106,16 +125,14 @@ export default {
       userlist: [],
       total: 0,
       editForm: {
-        data: "",
+        guid: "",
         name: "",
         email: "",
         status: "",
         tel: "",
         address: ""
       },
-      tableData: [
-        
-      ]
+      tableData: []
     };
   },
   //   created() {
@@ -124,7 +141,7 @@ export default {
   methods: {
     //删除功能实现
     handleDelete: function(index) {
-      this.tableData.splice(index, 1);
+      this.userlist.splice(index, 1);
     },
 
     // //监听pagesize
@@ -140,8 +157,8 @@ export default {
 
     //弹出框确定新增
     OkdialogVisible() {
-      this.tableData.push({
-        value1: this.value1.data,
+      this.userlist.push({
+        guid: this.editForm.guid,
         name: this.editForm.name,
         email: this.editForm.email,
         status: this.editForm.status,
@@ -154,11 +171,12 @@ export default {
   },
 
   //获取用户数据列表
-  created(){
-    var vm = this
-    this.$axios.get('https://www.easy-mock.com/mock/5efc777ebdec161dc9c4070f/userlist')
-    .then(resp=>{
-      vm.userlist = resp.data.userlist
+  created() {
+    //  var vm = this
+    this.$axios.get("/user/userlist").then(res => {
+      // vm.userlist = resp.data.userlist
+      console.log(res);
+      this.userlist = res.data.data;
     });
   }
 };
