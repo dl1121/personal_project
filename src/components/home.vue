@@ -12,7 +12,7 @@
     <el-container>
       <!-- 侧边栏 -->
       <el-aside width="iscollapse? '64px' : '200px'">
-        <div class="tog-btn" @click="togolist">|||</div>
+        <!-- <div class="tog-btn" @click="togolist">|||</div> -->
         <!-- <el-menu
           :unique-opened="true"
           default-active="2"
