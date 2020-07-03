@@ -2,7 +2,8 @@ import Vue from 'vue'
 import { Button,Row,Col ,table,TableColumn,Dialog,pagination,DatePicker} from 'element-ui'
 import { Form, FormItem ,breadcrumb,BreadcrumbItem,card} from 'element-ui'
 import { Input ,container,header,aside,main} from 'element-ui'
-import { Message ,menu,submenu,MenuItemGroup,MenuItem} from 'element-ui'
+import { Message, menu, submenu, MenuItemGroup, MenuItem } from 'element-ui'
+import { Loading } from 'element-ui';
 
 Vue.use(Row)
 Vue.use(Col)
