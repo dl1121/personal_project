@@ -11,7 +11,8 @@
     <!-- 主体 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside width="iscollapse? '64px' : '200px'">
+      <!-- <el-aside width="iscollapse? '64px' : '200px'"> -->
+        <el-aside width=200px>
         <!-- <div class="tog-btn" @click="togolist">|||</div> -->
         <!-- <el-menu
           :unique-opened="true"
@@ -59,7 +60,7 @@
               <span>导航一</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/users">用户管理</el-menu-item>
+              <el-menu-item class="iconfont icon-users" index="/users">用户管理</el-menu-item>
               <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
@@ -92,13 +93,13 @@ export default {
       //侧边菜单栏列表
       menulist: [],
       //二级菜单栏图标
-      iconsObj: {
-        "125": "iconfont icon-users",
-        "103": "iconfont icon-tijikongjian",
-        "101": "iconfont icon-shangpin",
-        "102": "iconfont icon-danju",
-        "145": "iconfont icon-baobiao"
-      },
+      // iconsObj: {
+      //   "125": "iconfont icon-users",
+      //   "103": "iconfont icon-tijikongjian",
+      //   "101": "iconfont icon-shangpin",
+      //   "102": "iconfont icon-danju",
+      //   "145": "iconfont icon-baobiao"
+      // },
       iscollapse: false
     };
   },
