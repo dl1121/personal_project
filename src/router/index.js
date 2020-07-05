@@ -4,6 +4,7 @@ import Login from '../components/Login.vue'
 import home from '../components/home.vue'
 import welcome from '../components/welcome.vue'
 import users from '../components/user/users.vue'
+import err404 from '../components/user/err404.vue'
 
 //解决 Error: Avoided redundant navigation to current location: 报错信息
 const originalPush = VueRouter.prototype.push
@@ -25,6 +26,7 @@ const routes = [
       path: '/login',
       component:Login
   },
+
     
     //主页
   {
@@ -40,7 +42,14 @@ const routes = [
       {
         path: '/users',
         component:users
-    }
+      },
+            //404页面
+  {
+    path: '/err404',
+    component:err404
+      },
+  
+      
     ]
 },
     

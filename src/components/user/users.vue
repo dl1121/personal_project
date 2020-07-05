@@ -88,10 +88,26 @@
             <el-button type="primary" @click="OkdialogVisible('editForm')">确 定</el-button>
           </span>
         </el-dialog>
+
+        <!-- 修改用户对话框 -->
+
+        <el-dialog title="修改用户" :visible.sync="editdialogVisible" width="30%" append-to-body>
+          <el-form :model="userlist" ref="userlist" label-width="70px">
+            <el-form-item label="用户名" prop="name">
+              <el-input v-model="this.userlist.name" disabled></el-input>
+            </el-form-item>
+          </el-form>
+
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="editdialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="editdialogVisible = false">确 定</el-button>
+          </span>
+        </el-dialog>
+
         <!-- 用户操作 -->
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="mini" @click="handleEdit()">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             <el-button size="mini" type="info">查看</el-button>
           </template>
@@ -117,6 +133,8 @@
 export default {
   data() {
     return {
+      //修改用户对话框
+      editdialogVisible: false,
       // value1: "",
       //对话框
       dialogVisible: false,
@@ -129,13 +147,15 @@ export default {
         //当前页显示数据数
         pagesize: "2"
       },
-      options: [{
-           value: '启用',
-          label: '启用'
-        }, {
-           value: '禁用',
-          label: '禁用'
+      options: [
+        {
+          value: "启用",
+          label: "启用"
         },
+        {
+          value: "禁用",
+          label: "禁用"
+        }
       ],
 
       userlist: [],
@@ -147,9 +167,9 @@ export default {
         status: "",
         tel: "",
         address: "",
-        status:""
-      },
-      tableData: []
+        status: ""
+      }
+      // tableData: []
     };
   },
   //   created() {
@@ -181,10 +201,15 @@ export default {
         status: this.editForm.status,
         tel: this.editForm.tel,
         address: this.editForm.address,
-        status:this.editForm.status
+        status: this.editForm.status
       });
       this.editForm = {};
       this.dialogVisible = false;
+    },
+
+    //用户数据列表的修改
+    handleEdit() {
+        this.$router.push({path:'/err404'})
     }
   },
 
@@ -193,8 +218,8 @@ export default {
     //  var vm = this
     this.$axios.get("/user/userlist").then(res => {
       // vm.userlist = resp.data.userlist
-      console.log(res);
       this.userlist = res.data.data;
+      // console.log(res);
     });
   }
 };

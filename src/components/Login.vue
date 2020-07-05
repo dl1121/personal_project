@@ -107,6 +107,7 @@ export default {
           center: true,
           type: "success"
         });
+        console.log(res)
         //保存token值
         window.sessionStorage.setItem("token", res.data.token);
 
