@@ -47,8 +47,8 @@ export default {
     return {
       // 双向数据绑定
       loginForm: {
-        username: "dengli",
-        password: "123456"
+        username: "",
+        password: ""
       },
 
       //表单验证
@@ -107,6 +107,7 @@ export default {
           center: true,
           type: "success"
         });
+        console.log(res)
         //保存token值
         window.sessionStorage.setItem("token", res.data.token);
 
