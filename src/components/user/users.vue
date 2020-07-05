@@ -45,8 +45,8 @@
           <el-form :model="editForm">
             <el-input
               class="formInput"
-              prefix-icon="el-icon-time"
-              placeholder
+              prefix-icon="el-icon-thumb"
+              placeholder="请输入序号"
               v-model="editForm.guid"
             ></el-input>
 
@@ -74,6 +74,14 @@
               placeholder="请输入联系地址"
               v-model="editForm.address"
             ></el-input>
+            <el-select class="formInput" v-model="editForm.status" placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
           </el-form>
           <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -109,7 +117,7 @@
 export default {
   data() {
     return {
-      value1: "",
+      // value1: "",
       //对话框
       dialogVisible: false,
 
@@ -121,6 +129,14 @@ export default {
         //当前页显示数据数
         pagesize: "2"
       },
+      options: [{
+           value: '启用',
+          label: '启用'
+        }, {
+           value: '禁用',
+          label: '禁用'
+        },
+      ],
 
       userlist: [],
       total: 0,
@@ -130,7 +146,8 @@ export default {
         email: "",
         status: "",
         tel: "",
-        address: ""
+        address: "",
+        status:""
       },
       tableData: []
     };
@@ -163,7 +180,8 @@ export default {
         email: this.editForm.email,
         status: this.editForm.status,
         tel: this.editForm.tel,
-        address: this.editForm.address
+        address: this.editForm.address,
+        status:this.editForm.status
       });
       this.editForm = {};
       this.dialogVisible = false;

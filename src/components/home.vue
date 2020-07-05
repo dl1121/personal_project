@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <el-header>
       <div>
-        <img src="../assets/mainlogo.png" />
+        <!-- <img src="../assets/mainlogo.png" /> -->
         <span>后台管理系统</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
@@ -46,7 +46,7 @@
 
         <el-menu
           :unique-opened="true"
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
           background-color="#515a6e"
           text-color="#fff"
@@ -57,7 +57,7 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>用户数据</span>
             </template>
             <el-menu-item-group>
               <el-menu-item class="iconfont icon-users" index="/users">用户管理</el-menu-item>

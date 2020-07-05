@@ -47,8 +47,8 @@ export default {
     return {
       // 双向数据绑定
       loginForm: {
-        username: "dengli",
-        password: "123456"
+        username: "",
+        password: ""
       },
 
       //表单验证
